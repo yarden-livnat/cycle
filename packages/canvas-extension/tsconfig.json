@@ -5,7 +5,6 @@
     "noEmitOnError": true,
     "noUnusedLocals": false,
     "skipLibCheck": true,
-    "allowJs": true,
     "sourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
