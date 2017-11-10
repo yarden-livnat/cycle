@@ -27,7 +27,7 @@ const FORWARD_ICON_CLASS = 'fa fa-mail-forward';
 
 class CycleContentFactory extends NotebookPanel.ContentFactory {
  createNotebook(options: Notebook.IOptions): Notebook {
-   console.log('CycleContentFactory:createNew');
+   // console.log('CycleContentFactory:createNew');
    this._nb = super.createNotebook(options);
    return this._nb;
  }
@@ -35,7 +35,7 @@ class CycleContentFactory extends NotebookPanel.ContentFactory {
  createCodeCell(options: CodeCell.IOptions, parent: Notebook): CodeCell {
    let cell = super.createCodeCell(options, parent);
    cell.outputArea.model.changed.connect( (model, data) => {
-    console.log('output model changed', model, data);
+    // console.log('output model changed', model, data);
     });
 
    cell.outputArea.outputLengthChanged.connect((sender,data) => {

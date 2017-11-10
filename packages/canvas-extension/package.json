@@ -13,7 +13,8 @@
     "build": "tsc",
     "clean": "rimraf lib",
     "prepack": "npm run clean && npm run build",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "link": "jupyter labextension link ."
   },
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",

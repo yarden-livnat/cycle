@@ -1,0 +1,7 @@
+{
+  "name": "@cycle/server-watch",
+  "version": "0.1.0",
+  "scripts": {
+    "watch": "jupyter lab --watch"
+  }
+}

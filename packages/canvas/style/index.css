@@ -48,3 +48,9 @@
   background-color: var(--jp-toolbar-active-background);
   box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.5);
 }
+
+/*.cycle-canvas-item {
+  width: 200px;
+  height: 100px;
+  background-color: lightgray;
+}*/

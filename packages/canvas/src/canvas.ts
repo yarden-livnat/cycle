@@ -3,11 +3,15 @@ import {
 } from '@phosphor/messaging';
 
 import {
+  Cell, CodeCell
+} from '@jupyterlab/cells';
+
+import {
   nbformat
 } from '@jupyterlab/coreutils';
 
 import {
-  Widget
+  PanelLayout, Widget
 } from '@phosphor/widgets';
 
 import {
@@ -16,6 +20,8 @@ import {
 
 import * as d3 from 'd3';
 import {event as d3event} from 'd3';
+
+import {CanvasItem} from './canvas_item';
 
 const JUPYTER_CELL_MIME = 'application/vnd.jupyter.cells';
 
@@ -30,13 +36,20 @@ class CycleCanvas extends Widget {
     this.title.closable = true;
     this.addClass('cyclus-canvas');
 
+    this.layout = new PanelLayout();
+
     d3.select(this.node)
-      .on('p-dragenter', this.dragEnter)
-      .on('p-dragleave', this.dragLeave)
-      .on('p-dragover', this.dragOver)
-      .on('p-drop', this.dragDrop);
+      .on('p-dragenter', () => this.dragEnter())
+      .on('p-dragleave', () => this.dragLeave())
+      .on('p-dragover', () => this.dragOver())
+      .on('p-drop', () => this.dragDrop());
   }
 
+  private items: CanvasItem[] = [];
+
+  get panelLayout() : PanelLayout {
+    return this.layout as PanelLayout;
+  }
   dragEnter() {
     if (!d3.event.mimeData.hasData(JUPYTER_CELL_MIME)) {
       return;
@@ -74,22 +87,13 @@ class CycleCanvas extends Widget {
       return;
     }
     event.dropAction = 'copy';
-    let items : [nbformat.ICell]= event.mimeData.getData(JUPYTER_CELL_MIME);
-    console.log('items:', items);
-    for (let item of items) {
-      if (item.cell_type == 'code') {
-        console.log('code:', item);
+    let cells : Cell[]= event.mimeData.getData('internal:cells'); //JUPYTER_CELL_MIME);
+    for (let cell of cells) {
+      if (cell instanceof CodeCell) {
+        let item  = new CanvasItem(cell);
+        this.items.push(item);
+        this.panelLayout.addWidget(item);
       }
     }
-    //let widgets = event.mimeData.getData('internal:cells');
-  }
-
-    // let values = event.mimeData.getData(JUPYTER_CELL_MIME);
-}
-
-class
-CanvasItem {
-  constructor(cell: nbformat.ICell) {
-
   }
 }
