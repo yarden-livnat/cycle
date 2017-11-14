@@ -11,7 +11,7 @@ import {
 } from '@jupyterlab/coreutils';
 
 import {
-  PanelLayout, Widget
+  PanelLayout, Widget, DockPanel
 } from '@phosphor/widgets';
 
 import {
@@ -36,7 +36,9 @@ class CycleCanvas extends Widget {
     this.title.closable = true;
     this.addClass('cyclus-canvas');
 
-    this.layout = new PanelLayout();
+    let layout = this.layout = new PanelLayout();
+    // this.dock = new DockPanel();
+    // layout.addWidget(this.dock);
 
     d3.select(this.node)
       .on('p-dragenter', () => this.dragEnter())
@@ -45,6 +47,7 @@ class CycleCanvas extends Widget {
       .on('p-drop', () => this.dragDrop());
   }
 
+  private dock: DockPanel;
   private items: CanvasItem[] = [];
 
   get panelLayout() : PanelLayout {
