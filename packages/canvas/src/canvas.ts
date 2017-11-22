@@ -22,6 +22,7 @@ import * as d3 from 'd3';
 import {event as d3event} from 'd3';
 
 import {CanvasItem} from './canvas_item';
+import '../style/index.css';
 
 const JUPYTER_CELL_MIME = 'application/vnd.jupyter.cells';
 

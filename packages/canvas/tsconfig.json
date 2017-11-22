@@ -13,5 +13,5 @@
     "lib": ["ES6",  "DOM"],
     "types": []
   },
-  "include": ["src/*"]
+  "include": ["src/**/*"]
 }
